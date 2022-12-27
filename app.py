@@ -8,6 +8,11 @@ from flask import send_file
 
 app=Flask(__name__)
 
+#enable api access
+from flask_cors import CORS
+CORS(app)
+
+
 @app.route('/')
 def index():
     data = {
@@ -20,8 +25,13 @@ def index():
 book_list=[
     {
         'id':1,
-        'name':'asad',
-        'author':'rahat'
+        'name':'PHP',
+        'author':'Asad'
+    },
+    {
+        'id':1,
+        'name':'Vue JS',
+        'author':'Shanto'
     }
 ]    
 
@@ -36,7 +46,7 @@ def data():
     return df.to_json()
 
 
-@app.route('/csv-download') # this is a job for GET, not POST
+@app.route('/csv-download') # this is a job for GET
 def plot_csv():
     return send_file(
         'made.csv',
